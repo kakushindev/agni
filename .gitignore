@@ -1,0 +1,4 @@
+node_modules
+.vimsession
+.env
+.env.prod
