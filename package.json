@@ -1,15 +1,18 @@
 {
   "name": "agni",
   "version": "0.0.1",
+  "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "start": "tsx src/index.ts"
+    "start": "tsx src/index.ts",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@hono/node-server": "^1.7.0",
     "hono": "^4.0.0"
   },
   "devDependencies": {
+    "@hazmi35/eslint-config": "^13.3.1",
     "tsx": "^3.12.2"
   }
 }
