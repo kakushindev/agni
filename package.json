@@ -9,10 +9,12 @@
   },
   "dependencies": {
     "@hono/node-server": "^1.7.0",
-    "hono": "^4.0.0"
+    "hono": "^4.0.0",
+    "reflect-metadata": "^0.2.1"
   },
   "devDependencies": {
     "@hazmi35/eslint-config": "^13.3.1",
+    "@tsconfig/node-lts": "^20.1.1",
     "tsx": "^3.12.2"
   }
 }

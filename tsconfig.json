@@ -1,8 +1,15 @@
 {
+  "extends": "@tsconfig/node-lts/tsconfig.json",
   "compilerOptions": {
+    "lib": ["ES2023", "DOM"],
     "strict": true,
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
+    "experimentalDecorators": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "include": [ "./src" ]
+  "include": ["./src/**/*.ts"]
 }

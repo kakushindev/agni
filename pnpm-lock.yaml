@@ -11,11 +11,17 @@ dependencies:
   hono:
     specifier: ^4.0.0
     version: 4.0.5
+  reflect-metadata:
+    specifier: ^0.2.1
+    version: 0.2.1
 
 devDependencies:
   '@hazmi35/eslint-config':
     specifier: ^13.3.1
     version: 13.3.1(@eslint/eslintrc@3.0.1)(@stylistic/eslint-plugin@1.6.2)(@typescript-eslint/eslint-plugin@7.0.2)(@typescript-eslint/parser@7.0.2)(eslint-config-prettier@9.1.0)(eslint-import-resolver-typescript@3.6.1)(eslint-plugin-import@2.29.1)(eslint-plugin-jsdoc@48.2.0)(eslint-plugin-n@16.6.2)(eslint-plugin-promise@6.1.1)(eslint-plugin-tsdoc@0.2.17)(eslint-plugin-unicorn@51.0.1)(eslint@8.56.0)(globals@14.0.0)(typescript@5.3.3)
+  '@tsconfig/node-lts':
+    specifier: ^20.1.1
+    version: 20.1.1
   tsx:
     specifier: ^3.12.2
     version: 3.14.0
@@ -475,6 +481,10 @@ packages:
     transitivePeerDependencies:
       - supports-color
       - typescript
+    dev: true
+
+  /@tsconfig/node-lts@20.1.1:
+    resolution: {integrity: sha512-V7wHydi1dv8I8xiOX3pJ0lhC+MlOakznvLks94J6y/TqQK6DBcbdD1G4jEq8yU+s6lBASPn4e1Ci636fDqeyvQ==}
     dev: true
 
   /@types/eslint@8.56.3:
@@ -2305,6 +2315,10 @@ packages:
       parse-json: 5.2.0
       type-fest: 0.6.0
     dev: true
+
+  /reflect-metadata@0.2.1:
+    resolution: {integrity: sha512-i5lLI6iw9AU3Uu4szRNPPEkomnkjRTaVt9hy/bn5g/oSzekBSMeLZblcjP74AW0vBabqERLLIrz+gR8QYR54Tw==}
+    dev: false
 
   /regexp-tree@0.1.27:
     resolution: {integrity: sha512-iETxpjK6YoRWJG5o6hXLwvjYAoW+FEZn9os0PD/b6AP6xQwsa/Y7lCVgIixBbUPMfhu+i2LtdeAqVTgGlQarfA==}
