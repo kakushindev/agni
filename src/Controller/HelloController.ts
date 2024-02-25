@@ -3,7 +3,7 @@ import Controller, { route } from "./Controller.js";
 
 export default class HelloController extends Controller {
     @route("get", "/hello")
-    public hellow(c: DefaultHonoContext): void {
-        c.text("Say hello world!");
+    public hellow(c: DefaultHonoContext): Response {
+        return c.text("Say hello world!");
     }
 }

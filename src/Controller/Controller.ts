@@ -1,5 +1,7 @@
 import "reflect-metadata";
 import type { Context, Env, Hono } from "hono";
+import type { Factory } from "hono/factory";
+import { createFactory } from "hono/factory";
 import type { BlankInput, BlankSchema, H, HandlerInterface } from "hono/types";
 import { InsufficientControllerMethodError, NotSupportedMethodError } from "Error/AppError.js";
 
@@ -30,6 +32,7 @@ export function route(method: AgniSupportedMethod, path: string): Function {
  * Base of Controller class.
  */
 export default class Controller {
+    public _honoFactory: Factory = createFactory();
     public constructor(public app: Hono<Env, BlankSchema, string>) {}
 
     public prepareClass(): void {
@@ -53,10 +56,11 @@ export default class Controller {
             }
 
             /**
-             * TODO [2024-02-25]: Change hono `app` to Factory
-             * https://hono.dev/guides/best-practices#factory-createhandlers-in-hono-factory
+             * TODO [2024-02-25]: Add support for middleware, multi handler/middleware
+             * and validator using Zod Validate
              */
-            honoApp(metadata.path, c => c.text("Hello world!"));
+            const handlers = this._honoFactory.createHandlers(func);
+            honoApp(metadata.path, ...handlers);
         }
     }
 }
