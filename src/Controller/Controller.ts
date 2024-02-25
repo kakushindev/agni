@@ -3,7 +3,7 @@ import type { Context, Env, Hono } from "hono";
 import type { Factory } from "hono/factory";
 import { createFactory } from "hono/factory";
 import type { BlankInput, BlankSchema, H, HandlerInterface } from "hono/types";
-import { InsufficientControllerMethodError, NotSupportedMethodError } from "Error/AppError.js";
+import { InsufficientControllerMethodError, NotSupportedMethodError } from "App/Error/AppError.js";
 
 export const MetadataConstant = "agniRouting";
 export type AgniRoutingMetadata = {

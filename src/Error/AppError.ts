@@ -1,17 +1,8 @@
-export class InsufficientControllerMethodError extends Error {
+export class SampleError extends Error {
     public constructor() {
-        super("Insufficient methods in the controller.");
+        super("This is sample error");
 
-        this.name = "InsufficientControllerMethodError";
-        Object.setPrototypeOf(this, InsufficientControllerMethodError.prototype);
-    }
-}
-
-export class NotSupportedMethodError extends Error {
-    public constructor() {
-        super("This method is not supported.");
-
-        this.name = "NotSupportedMethodError";
-        Object.setPrototypeOf(this, NotSupportedMethodError.prototype);
+        this.name = "SampleError";
+        Object.setPrototypeOf(this, SampleError.prototype);
     }
 }
