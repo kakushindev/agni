@@ -1,6 +1,6 @@
 import { join } from "node:path";
 import { NoDefaultExportError, IsNotConstructorError } from "App/Error/AppError.js";
-import type { DefaultHonoApp } from "Controller/Controller.js";
+import type { DefaultHonoApp } from "App/Types/ControllerTypes.js";
 import Controller from "Controller/Controller.js";
 import traversalFileScan from "./TraversalFileScan.js";
 
