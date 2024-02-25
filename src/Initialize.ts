@@ -1,6 +1,6 @@
 import { logger } from "hono/logger";
 import injectController from "App/Function/InjectController.js";
-import type { DefaultHonoApp } from "Controller/Controller.js";
+import type { DefaultHonoApp } from "App/Types/ControllerTypes.js";
 
 export async function initialize(app: DefaultHonoApp): Promise<void> {
     /**

@@ -1,40 +1,22 @@
 import "reflect-metadata";
-import type { Context, Env, Hono } from "hono";
 import type { Factory } from "hono/factory";
 import { createFactory } from "hono/factory";
-import type { BlankInput, BlankSchema, H, HandlerInterface } from "hono/types";
+import type { HandlerInterface } from "hono/types";
 import { InsufficientControllerMethodError, NotSupportedMethodError } from "App/Error/AppError.js";
-
-export const MetadataConstant = "agniRouting";
-export type AgniRoutingMetadata = {
-    path: string;
-    method: AgniSupportedMethod;
-};
-
-export type AgniSupportedMethod = "delete" | "get" | "patch" | "post" | "put";
-export type DefaultHonoApp = Hono<Env, BlankSchema, string>;
-export type DefaultHonoContext = Context<Env, string, BlankInput>;
-export type DefaultHonoFunctionContext = H<Env, string, BlankInput, Response>;
-
-/**
- * Set the path for GET route function.
- *
- * @param method - HTTP Method
- * @param path - Target path of route
- */
-export function route(method: AgniSupportedMethod, path: string): Function {
-    return function decorate(target: Controller, propKey: string, descriptor: PropertyDescriptor): void {
-        const targetFunc = descriptor.value as Function;
-        Reflect.defineMetadata(MetadataConstant, { path, method }, targetFunc);
-    };
-}
+import { MetadataConstant } from "App/Types/ControllerConstant.js";
+import type {
+    AgniRoutingMetadata,
+    AgniSupportedMethod,
+    DefaultHonoApp,
+    DefaultHonoFunctionContext
+} from "App/Types/ControllerTypes.js";
 
 /**
  * Base of Controller class.
  */
 export default class Controller {
     public _honoFactory: Factory = createFactory();
-    public constructor(public app: Hono<Env, BlankSchema, string>) {}
+    public constructor(public app: DefaultHonoApp) {}
 
     public prepareClass(): void {
         const methodList = Object
