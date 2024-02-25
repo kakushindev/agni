@@ -15,8 +15,10 @@
   },
   "devDependencies": {
     "@hazmi35/eslint-config": "^13.3.1",
+    "@hono/zod-validator": "^0.1.11",
     "@tsconfig/node-lts": "^20.1.1",
     "@types/node": "^20.11.20",
-    "tsx": "^3.12.2"
+    "tsx": "^3.12.2",
+    "zod": "^3.22.4"
   }
 }
