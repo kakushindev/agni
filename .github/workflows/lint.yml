@@ -1,0 +1,46 @@
+name: Lint code
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - "**"
+  workflow_call:
+    secrets:
+      BOT_TOKEN:
+        required: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      with:
+        fetch-depth: 2
+
+    - name: Setup pnpm
+      uses: pnpm/action-setup@d882d12c64e032187b2edb46d3a0d003b7a43598 # v2.4.0
+      with:
+        version: latest
+
+    - name: Setup Node.js
+      uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65 # v4.0.0
+      with:
+        node-version-file: .node-version
+        check-latest: true
+        cache: 'pnpm'
+
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+      env:
+          NPM_CONFIG_USERCONFIG: .ci.npmrc
+          GH_PKG_AUTH_TOKEN: ${{ secrets.BOT_TOKEN }}
+
+    - name: Run compose script if exists
+      run: pnpm run --if-present compose
+
+    - name: Lint code
+      run: pnpm run lint
