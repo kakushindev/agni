@@ -50,7 +50,7 @@ export default class Controller {
 
             ctx.push(func);
 
-            // TODO [2024-02-26]: How to bypass this?
+            // TODO [2024-03-01]: How to bypass this?
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-expect-error
             const handlers = this._honoFactory.createHandlers(...(ctx as DefaultHonoFunctionContext[]));
