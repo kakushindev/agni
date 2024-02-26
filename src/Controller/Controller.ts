@@ -42,7 +42,7 @@ export default class Controller {
             /**
              * TODO [2024-02-27]: Add support for middleware, multi handler/middleware
              */
-            const ctx: any[] = [];
+            const ctx: DefaultHonoFunctionContext[] = [];
             if (metadataKeys.includes(MetadataValidatorConstant)) {
                 const middleware = Reflect.getMetadata(MetadataValidatorConstant, func) as MiddlewareHandler;
                 ctx.push(this._honoFactory.createMiddleware(middleware));
@@ -53,7 +53,7 @@ export default class Controller {
             // TODO [2024-03-01]: How to bypass this?
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-expect-error
-            const handlers = this._honoFactory.createHandlers(...(ctx as DefaultHonoFunctionContext[]));
+            const handlers = this._honoFactory.createHandlers(...ctx);
             honoApp(metadata.path, ...handlers);
         }
     }
