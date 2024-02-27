@@ -1,9 +1,9 @@
 import "reflect-metadata";
 import type { Factory } from "hono/factory";
 import { createFactory } from "hono/factory";
-import type { HandlerInterface } from "hono/types";
+import type { HandlerInterface, MiddlewareHandler } from "hono/types";
 import { InsufficientControllerMethodError, NotSupportedMethodError } from "App/Error/AppError.js";
-import { MetadataConstant } from "App/Types/ControllerConstant.js";
+import { MetadataConstant, MetadataValidatorConstant } from "App/Types/ControllerConstant.js";
 import type {
     AgniRoutingMetadata,
     AgniSupportedMethod,
@@ -33,16 +33,27 @@ export default class Controller {
             if (!Reflect.hasMetadata(MetadataConstant, func)) return;
 
             const metadata = Reflect.getMetadata(MetadataConstant, func) as AgniRoutingMetadata;
+            const metadataKeys = Reflect.getMetadataKeys(func);
             const honoApp = (this.app as Record<AgniSupportedMethod, any>)[metadata.method] as HandlerInterface | undefined;
             if (typeof honoApp !== "function") {
                 throw new NotSupportedMethodError();
             }
 
             /**
-             * TODO [2024-02-25]: Add support for middleware, multi handler/middleware
-             * and validator using Zod Validate
+             * TODO [2024-02-27]: Add support for middleware, multi handler/middleware
              */
-            const handlers = this._honoFactory.createHandlers(func);
+            const ctx: DefaultHonoFunctionContext[] = [];
+            if (metadataKeys.includes(MetadataValidatorConstant)) {
+                const middleware = Reflect.getMetadata(MetadataValidatorConstant, func) as MiddlewareHandler;
+                ctx.push(this._honoFactory.createMiddleware(middleware));
+            }
+
+            ctx.push(func);
+
+            // TODO [2024-03-01]: How to bypass this?
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
+            const handlers = this._honoFactory.createHandlers(...ctx);
             honoApp(metadata.path, ...handlers);
         }
     }
