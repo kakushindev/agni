@@ -1,7 +1,8 @@
 import { logger } from "hono/logger";
 import injectController from "App/Function/InjectController.js";
-import onError from "App/Function/OnError.js";
 import type { DefaultHonoApp } from "App/Types/ControllerTypes.js";
+import onError from "Function/OnError.js";
+import { onNotFound } from "Function/OnNotFound.js";
 
 export async function initialize(app: DefaultHonoApp): Promise<void> {
     /**
@@ -15,6 +16,9 @@ export async function initialize(app: DefaultHonoApp): Promise<void> {
 
     // When error is spawned
     app.onError(onError);
+
+    // When is not found
+    app.notFound(onNotFound);
 
     /**
      * The rest of initialize ends here. After this, system will
