@@ -1,7 +1,9 @@
+import { randomUUID } from "node:crypto";
 import type { Context, Env } from "hono";
 import type { HTTPException } from "hono/http-exception";
 import type { StatusCode } from "hono/utils/http-status";
 import isJson from "App/Function/IsJson.js";
+import Logger from "Logger.js";
 
 type ErrorRecord = {
     message: string;
@@ -21,8 +23,15 @@ export default function onError(err: Error, c: Context<Env, any, any>): Response
     if (Object.keys(err).includes("status")) {
         const newErr = err as HTTPException;
         code = newErr.status;
+
         errResponse.message = newErr.message;
         delete errResponse.errMessage;
+    }
+
+    // If fatal error
+    if (code === 500) {
+        errResponse.uuidErr = randomUUID();
+        Logger.child({ uuid: errResponse.uuidErr }).error(err, "Fatal error on server");
     }
 
     const jsonMethod = isJson(c.req.header());
