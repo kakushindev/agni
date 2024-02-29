@@ -3,6 +3,7 @@ import injectController from "App/Function/InjectController.js";
 import type { DefaultHonoApp } from "App/Types/ControllerTypes.js";
 import onError from "Function/OnError.js";
 import { onNotFound } from "Function/OnNotFound.js";
+import Logger from "Logger.js";
 
 export async function initialize(app: DefaultHonoApp): Promise<void> {
     /**
@@ -12,7 +13,9 @@ export async function initialize(app: DefaultHonoApp): Promise<void> {
      */
 
     // Initialize Logger
-    app.use(logger());
+    app.use(logger((msg: string, ...rest: string[]) => {
+        Logger.info(msg, ...rest);
+    }));
 
     // When error is spawned
     app.onError(onError);

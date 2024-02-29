@@ -2,3 +2,4 @@ node_modules
 .vimsession
 .env
 .env.prod
+package-lock.json

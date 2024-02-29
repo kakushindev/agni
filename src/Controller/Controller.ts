@@ -10,6 +10,7 @@ import type {
     DefaultHonoApp,
     DefaultHonoFunctionContext
 } from "App/Types/ControllerTypes.js";
+import Logger from "Logger.js";
 
 /**
  * Base of Controller class.
@@ -49,6 +50,7 @@ export default class Controller {
             }
 
             ctx.push(func);
+            Logger.info(`Register ${metadata.method}:${metadata.path} route`);
 
             // TODO [2024-03-01]: How to bypass this?
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
