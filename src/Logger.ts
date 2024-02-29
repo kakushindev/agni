@@ -13,7 +13,7 @@ const PinoTraits: LoggerOptions = {
 };
 
 // Colorize print if in Development
-if (process.env.PRODUCTION === "false") {
+if (process.env.NODE_ENV !== "production") {
     PinoTraits.transport = {
         target: "pino-pretty",
         options: {
