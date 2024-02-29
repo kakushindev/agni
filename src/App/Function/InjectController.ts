@@ -2,6 +2,7 @@ import { join } from "node:path";
 import { NoDefaultExportError, IsNotConstructorError } from "App/Error/AppError.js";
 import type { DefaultHonoApp } from "App/Types/ControllerTypes.js";
 import Controller from "Controller/Controller.js";
+import Logger from "Logger.js";
 import traversalFileScan from "./TraversalFileScan.js";
 
 type ImportController = {
@@ -17,6 +18,7 @@ export default async function injectController(app: DefaultHonoApp): Promise<voi
     // Try to import file
     for (const file of files) {
         try {
+            Logger.info(`Importing ${file.split("/").pop()?.split(".")[0]}`);
             listFiles.push(import(file));
         } catch {
             throw new NoDefaultExportError();
