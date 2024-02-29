@@ -5,10 +5,10 @@ import isJson from "App/Function/IsJson.js";
 export function onValidateError(c: Context<any, any, any>, data: ZodData<any>): Response {
     const message = "Bad request performed.";
     const code = 400;
-    const requiredProps = Object.keys(data);
+    const propsOnServer = Object.keys(data);
 
     const jsonMethod = isJson(c.req.header());
-    if (jsonMethod) return c.json({ message, requiredProps }, code);
+    if (jsonMethod) return c.json({ message, propsOnServer }, code);
 
-    return c.text(`${message}\nMethod Required: ${requiredProps.toString()}`, code);
+    return c.text(message, code);
 }
