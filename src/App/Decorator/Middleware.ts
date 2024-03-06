@@ -8,13 +8,26 @@ import { onValidateError } from "Function/OnValidateError.js";
 
 export type ZodData<V> = { [VK in keyof V]: any };
 
+function reflectingMetadata(target: Function, func: MiddlewareHandler): void {
+    if (!Reflect.hasMetadata(MetadataMiddlewareConstant, target)) {
+        Reflect.defineMetadata(MetadataMiddlewareConstant, [func], target);
+        return;
+    }
+
+    const metadata = Reflect.getMetadata(MetadataMiddlewareConstant, target) as MiddlewareHandler[];
+    metadata.push(func);
+
+    Reflect.deleteMetadata(MetadataMiddlewareConstant, target);
+    Reflect.defineMetadata(MetadataMiddlewareConstant, metadata, target);
+}
+
 /**
  * Validate data for route.
  *
  * @param method - Target of request
  * @param data - Data to validate
  */
-export default function validator<T extends {}>(method: keyof ValidationTargets, data: ZodData<T>): Function {
+export function validator<T extends {}>(method: keyof ValidationTargets, data: ZodData<T>): Function {
     return function decorate(target: Controller, propKey: string, descriptor: PropertyDescriptor): void {
         const targetFunc = descriptor.value as Function;
         const funcValidator = honoValidator(method, (val, c) => {
@@ -22,16 +35,6 @@ export default function validator<T extends {}>(method: keyof ValidationTargets,
             if (!parsed.success) return onValidateError(c, data);
             return parsed.data;
         });
-
-        if (!Reflect.hasMetadata(MetadataMiddlewareConstant, targetFunc)) {
-            Reflect.defineMetadata(MetadataMiddlewareConstant, [funcValidator], targetFunc);
-            return;
-        }
-
-        const metadata = Reflect.getMetadata(MetadataMiddlewareConstant, targetFunc) as MiddlewareHandler[];
-        metadata.push(funcValidator);
-
-        Reflect.deleteMetadata(MetadataMiddlewareConstant, targetFunc);
-        Reflect.defineMetadata(MetadataMiddlewareConstant, metadata, targetFunc);
+        reflectingMetadata(targetFunc, funcValidator);
     };
 }

@@ -1,6 +1,6 @@
 import { z } from "zod";
 import httpRoute from "App/Decorator/HttpRoute.js";
-import validator from "App/Decorator/Validator.js";
+import { validator } from "App/Decorator/Middleware.js";
 import type { DefaultHonoContext, HonoInputContext } from "App/Types/ControllerTypes.js";
 import Controller from "./Controller.js";
 
