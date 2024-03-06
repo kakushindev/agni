@@ -1,2 +1,2 @@
 export const MetadataConstant = "agniRouting";
-export const MetadataValidatorConstant = "agniValidator";
+export const MetadataMiddlewareConstant = "agniMiddleware";

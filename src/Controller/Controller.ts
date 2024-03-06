@@ -3,7 +3,7 @@ import type { Factory } from "hono/factory";
 import { createFactory } from "hono/factory";
 import type { HandlerInterface, MiddlewareHandler } from "hono/types";
 import { InsufficientControllerMethodError, NotSupportedMethodError } from "App/Error/AppError.js";
-import { MetadataConstant, MetadataValidatorConstant } from "App/Types/ControllerConstant.js";
+import { MetadataConstant, MetadataMiddlewareConstant } from "App/Types/ControllerConstant.js";
 import type {
     AgniRoutingMetadata,
     AgniSupportedMethod,
@@ -40,13 +40,12 @@ export default class Controller {
                 throw new NotSupportedMethodError();
             }
 
-            /**
-             * TODO [2024-02-27]: Add support for middleware, multi handler/middleware
-             */
             const ctx: DefaultHonoFunctionContext[] = [];
-            if (metadataKeys.includes(MetadataValidatorConstant)) {
-                const middleware = Reflect.getMetadata(MetadataValidatorConstant, func) as MiddlewareHandler;
-                ctx.push(this._honoFactory.createMiddleware(middleware));
+            if (metadataKeys.includes(MetadataMiddlewareConstant)) {
+                const middleware = Reflect.getMetadata(MetadataMiddlewareConstant, func) as MiddlewareHandler[];
+                for (const midFunc of middleware) {
+                    ctx.push(this._honoFactory.createMiddleware(midFunc));
+                }
             }
 
             ctx.push(func);
