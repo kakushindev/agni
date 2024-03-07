@@ -21,8 +21,7 @@ async function indexMiddleware(_: DefaultHonoContext, next: Next): Promise<void>
 
 export default class HelloController extends Controller {
     @httpRoute("get", "/")
-    @middleware(cors())
-    @middleware(indexMiddleware)
+    @middleware(cors(), indexMiddleware)
     public hellow(c: DefaultHonoContext): Response {
         return c.text("Say hello world!");
     }
