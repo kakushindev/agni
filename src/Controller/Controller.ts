@@ -3,7 +3,7 @@ import type { Factory } from "hono/factory";
 import { createFactory } from "hono/factory";
 import type { HandlerInterface, MiddlewareHandler } from "hono/types";
 import { InsufficientControllerMethodError, NotSupportedMethodError } from "App/Error/AppError.js";
-import { MetadataConstant, MetadataValidatorConstant } from "App/Types/ControllerConstant.js";
+import { MetadataConstant, MetadataMiddlewareConstant } from "App/Types/ControllerConstant.js";
 import type {
     AgniRoutingMetadata,
     AgniSupportedMethod,
@@ -40,19 +40,17 @@ export default class Controller {
                 throw new NotSupportedMethodError();
             }
 
-            /**
-             * TODO [2024-02-27]: Add support for middleware, multi handler/middleware
-             */
             const ctx: DefaultHonoFunctionContext[] = [];
-            if (metadataKeys.includes(MetadataValidatorConstant)) {
-                const middleware = Reflect.getMetadata(MetadataValidatorConstant, func) as MiddlewareHandler;
-                ctx.push(this._honoFactory.createMiddleware(middleware));
+            if (metadataKeys.includes(MetadataMiddlewareConstant)) {
+                const middleware = Reflect.getMetadata(MetadataMiddlewareConstant, func) as MiddlewareHandler[];
+                for (const midFunc of middleware) {
+                    ctx.push(this._honoFactory.createMiddleware(midFunc));
+                }
             }
 
             ctx.push(func);
-            Logger.info(`Register ${metadata.method}:${metadata.path} route`);
+            Logger.info(`Register ${metadata.method}:${metadata.path} route [${ctx.length} handler]`);
 
-            // TODO [2024-03-01]: How to bypass this?
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-expect-error
             const handlers = this._honoFactory.createHandlers(...ctx);
