@@ -1,10 +1,28 @@
 {
-  "name": "agni",
+  "name": "@kakushindev/agni",
   "version": "0.0.1",
+  "description": "Semi-framework (but still boilerplate) Hono MVC Pattern using TypeScript language.",
+  "keywords": [
+    "boilerplate",
+    "mvc",
+    "hono",
+    "webserver",
+    "webapp",
+    "kakushin"
+  ],
+  "homepage": "https://github.com/kakushindev/agni#readme",
+  "bugs": {
+      "url": "https://github.com/kakushindev/agni/issues"
+  },
+  "repository": {
+      "type": "git",
+      "url": "git+https://github.com/kakushindev/agni.git"
+  },
+  "license": "AGPL-3.0",
+  "author": "Kakushin Devs <hello@kakushin.dev>",
   "type": "module",
   "scripts": {
     "start": "tsx src/index.ts",
-    "compile": "tsc --build tsconfig.json",
     "lint": "eslint .",
     "dev": "tsx watch --env-file=./.env src/index.ts"
   },
