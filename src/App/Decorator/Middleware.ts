@@ -39,6 +39,12 @@ export function validator<T extends {}>(method: keyof ValidationTargets, data: Z
     };
 }
 
+/**
+ * Add middleware on route.
+ *
+ * @param handlers - Middleware handlers for route
+ * @see MiddlewareHandler
+ */
 export function middleware(...handlers: MiddlewareHandler[] | Promise<MiddlewareHandler>[] | Promise<void>[]): Function {
     return function decorate(target: Controller, propKey: string, descriptor: PropertyDescriptor): void {
         const targetFunc = descriptor.value as Function;
