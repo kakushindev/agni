@@ -38,3 +38,11 @@ export function validator<T extends {}>(method: keyof ValidationTargets, data: Z
         reflectingMetadata(targetFunc, funcValidator);
     };
 }
+
+export function middleware(handler: MiddlewareHandler | Promise<MiddlewareHandler> | Promise<void>): Function {
+    return function decorate(target: Controller, propKey: string, descriptor: PropertyDescriptor): void {
+        const targetFunc = descriptor.value as Function;
+        const targetHandler = handler as MiddlewareHandler;
+        reflectingMetadata(targetFunc, targetHandler);
+    };
+}

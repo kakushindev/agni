@@ -49,9 +49,8 @@ export default class Controller {
             }
 
             ctx.push(func);
-            Logger.info(`Register ${metadata.method}:${metadata.path} route`);
+            Logger.info(`Register ${metadata.method}:${metadata.path} route [${ctx.length} handler]`);
 
-            // TODO [2024-03-01]: How to bypass this?
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-expect-error
             const handlers = this._honoFactory.createHandlers(...ctx);
