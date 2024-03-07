@@ -24,7 +24,8 @@
   "scripts": {
     "start": "tsx src/index.ts",
     "lint": "eslint .",
-    "dev": "tsx watch --env-file=./.env src/index.ts"
+    "dev": "tsx watch --env-file=./.env src/index.ts",
+    "release": "pnpm publish --access public --no-git-checks"
   },
   "dependencies": {
     "@hono/node-server": "^1.8.2",
