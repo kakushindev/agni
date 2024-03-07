@@ -1,5 +1,5 @@
 {
-  "name": "@kakushindev/agni",
+  "name": "@kakushin/agni",
   "version": "0.0.1",
   "description": "Semi-framework (but still boilerplate) Hono MVC Pattern using TypeScript language.",
   "keywords": [
