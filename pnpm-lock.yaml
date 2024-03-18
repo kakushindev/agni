@@ -9,8 +9,8 @@ dependencies:
     specifier: ^1.8.2
     version: 1.8.2
   hono:
-    specifier: ^4.1.1
-    version: 4.1.1
+    specifier: ^4.1.2
+    version: 4.1.2
   reflect-metadata:
     specifier: ^0.2.1
     version: 0.2.1
@@ -23,8 +23,8 @@ devDependencies:
     specifier: ^20.1.1
     version: 20.1.1
   '@types/node':
-    specifier: ^20.11.28
-    version: 20.11.28
+    specifier: ^20.11.29
+    version: 20.11.29
   pino:
     specifier: ^8.19.0
     version: 8.19.0
@@ -527,8 +527,8 @@ packages:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
 
-  /@types/node@20.11.28:
-    resolution: {integrity: sha512-M/GPWVS2wLkSkNHVeLkrF2fD5Lx5UC4PxA0uZcKc6QqbIQUJyW1jVjueJYi1z8n0I5PxYrtpnPnWglE+y9A0KA==}
+  /@types/node@20.11.29:
+    resolution: {integrity: sha512-P99thMkD/1YkCvAtOd6/zGedKNA0p2fj4ZpjCzcNiSCBWgm3cNRTBfa/qjFnsKkkojxu4vVLtWpesnZ9+ap+gA==}
     dependencies:
       undici-types: 5.26.5
     dev: true
@@ -1864,8 +1864,8 @@ packages:
     resolution: {integrity: sha512-7xgomUX6ADmcYzFik0HzAxh/73YlKR9bmFzf51CZwR+b6YtzU2m0u49hQCqV6SvlqIqsaxovfwdvbnsw3b/zpg==}
     dev: true
 
-  /hono@4.1.1:
-    resolution: {integrity: sha512-+ljwSwMby5vYaA1ZmP8iQSq/bF5wb8gGwFdybJk3A4yNwtn4X0zuyim49VNCYHBUi/jfY0bnzwntth4/eX6NHw==}
+  /hono@4.1.2:
+    resolution: {integrity: sha512-pbfllzxpZifsp8gbjB01wetLk6Lc4p0OkJmtbH92CYFMPAdL6dzS2tHldfPjnNP87mNJS717P72lt6jzZSqg/g==}
     engines: {node: '>=16.0.0'}
     dev: false
 
