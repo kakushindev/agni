@@ -18,22 +18,32 @@ export default class ErrorBuilder<T extends {}> implements IErrorBuilder<T> {
 
     public constructor(public title: string, public detail: string) {}
 
+    private setProps<P extends keyof this>(prop: P, val: this[P]): this {
+        this[prop] = val;
+        return this;
+    }
+
     public setKind<D extends T>(data: D): ErrorBuilder<D> {
-        this.kind = data;
-        return this as unknown as ErrorBuilder<D>;
+        return this.setProps("kind", data) as unknown as ErrorBuilder<D>;
     }
 
-    public setInstance(instance: string): ErrorBuilder<T> {
-        this.instance = instance;
-        return this as unknown as ErrorBuilder<T>;
+    public setInstance(instance: string): this {
+        return this.setProps("instance", instance);
     }
 
-    public setType(type: string): ErrorBuilder<T> {
-        this.type = type;
-        return this as unknown as ErrorBuilder<T>;
+    public setType(type: string): this {
+        return this.setProps("type", type);
     }
 
-    public build(): IErrorBuilder<T> {
+    public setTitle(title: string): this {
+        return this.setProps("title", title);
+    }
+
+    public setDetail(detail: string): this {
+        return this.setProps("detail", detail);
+    }
+
+    public build(): any {
         const data: IErrorBuilder<T> = {
             type: this.type,
             title: this.title,
