@@ -9,7 +9,7 @@ export function onValidateError(c: Context<any, any, any>, data: ZodData<any>): 
     builder
         .setKind(data)
         .setInstance(c.req.path)
-        .setType(`https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/${code}`);
+        .setMDNCodeType(code);
 
     const jsonMethod = isJson(c.req.header());
     if (jsonMethod) return c.json(builder.build(), code);

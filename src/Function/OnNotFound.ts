@@ -7,7 +7,7 @@ export function onNotFound(c: Context<any, any, any>): Response {
     const builder = new ErrorBuilder("Not found.", "Path or route not found.");
     builder
         .setInstance(c.req.path)
-        .setType(`https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/${code}`);
+        .setMDNCodeType(code);
 
     const jsonMethod = isJson(c.req.header());
     if (jsonMethod) return c.json(builder.build(), code);

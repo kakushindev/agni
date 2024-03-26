@@ -1,3 +1,5 @@
+import type { StatusCode } from "hono/utils/http-status";
+
 export type IErrorBuilder<T> = {
     title: string;
     detail: string;
@@ -29,6 +31,10 @@ export default class ErrorBuilder<T extends {}> implements IErrorBuilder<T> {
 
     public setInstance(instance: string): this {
         return this.setProps("instance", instance);
+    }
+
+    public setMDNCodeType(code: StatusCode): this {
+        return this.setProps("type", `https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/${code}`);
     }
 
     public setType(type: string): this {
