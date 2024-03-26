@@ -3,7 +3,7 @@ import ErrorBuilder from "App/Error/ErrorBuilder.js";
 import isJson from "App/Function/IsJson.js";
 
 export function onNotFound(c: Context<any, any, any>): Response {
-    const code = 400;
+    const code = 404;
     const builder = new ErrorBuilder("Not found.", "Path or route not found.");
     builder
         .setInstance(c.req.path)
