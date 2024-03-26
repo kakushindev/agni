@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
 import type { Context, Env } from "hono";
-import type { HTTPException } from "hono/http-exception";
+import { HTTPException } from "hono/http-exception";
 import type { StatusCode } from "hono/utils/http-status";
 import isJson from "App/Function/IsJson.js";
 import Logger from "Logger.js";
@@ -20,7 +20,7 @@ export default function onError(err: Error, c: Context<Env, any, any>): Response
     let code: StatusCode = 500;
 
     // Expecting this is HTTPError
-    if (Object.keys(err).includes("status")) {
+    if (err instanceof HTTPException) {
         const newErr = err as HTTPException;
         code = newErr.status;
 
