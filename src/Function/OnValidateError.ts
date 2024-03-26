@@ -1,7 +1,7 @@
 import type { Context } from "hono";
 import type { ZodData } from "App/Decorator/Middleware.js";
-import isJson from "App/Function/IsJson.js";
 import ErrorBuilder from "App/Error/ErrorBuilder.js";
+import isJson from "App/Function/IsJson.js";
 
 export function onValidateError(c: Context<any, any, any>, data: ZodData<any>): Response {
     const code = 400;
