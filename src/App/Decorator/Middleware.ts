@@ -32,7 +32,7 @@ export function validator<T extends {}>(method: keyof ValidationTargets, data: Z
         const targetFunc = descriptor.value as Function;
         const funcValidator = honoValidator(method, (val, c) => {
             const parsed = z.object(data).safeParse(val);
-            if (!parsed.success) return onValidateError(c, data);
+            if (!parsed.success) return onValidateError(c, parsed.error.issues);
             return parsed.data;
         });
         reflectingMetadata(targetFunc, funcValidator);
