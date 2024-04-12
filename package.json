@@ -28,7 +28,7 @@
     "release": "pnpm publish --access public --no-git-checks"
   },
   "dependencies": {
-    "@hono/node-server": "^1.9.1",
+    "@hono/node-server": "^1.10.0",
     "hono": "^4.2.3",
     "reflect-metadata": "^0.2.1"
   },
