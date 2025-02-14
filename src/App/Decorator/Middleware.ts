@@ -120,6 +120,15 @@ async function executeOperator(
  *    AND(IsLoggedIn, IsAdmin)
  * )
  * ```
+ * ```ts
+ * // Nested Statement
+ * middleware(
+ *    AND(
+ *      OR(IsGuestSessionValid, IsLoggedIn)
+ *      IsEditable
+ *    )
+ * )
+ * ```
  */
 export function middleware(...handlers: (MiddlewareHandler | MiddlewareOperator)[]): Function {
     return function decorate(target: any, propKey: string, descriptor: PropertyDescriptor): void {
